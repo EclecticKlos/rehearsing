@@ -91,4 +91,47 @@ HashTable.prototype.insert = function(key, value) {
 }
 
 
+ /**********************************************************************
+  *                           Homework X                               *
+  **********************************************************************/
 
+ /**********************************************************************
+  *  Problem 1: Max Consecutive Sum                                    *
+  *                                                                    *
+  *  Prompt: Given an array of integers find the sum of consecutive    *
+  *          values in the array that produces the maximum value.      *
+  *                                                                    *
+  *  Input:  Unsorted array of positive and negative integers          *
+  *  Output: Integer (max consecutive sum)                             *
+  *                                                                    *
+  *  Time Complexity: O(n)                                             *
+  *  Auxiliary Space Complexity: O(1)                                  *
+  *                                                                    *
+  *  Example: input = [6, -1, 3, 5, -10]                               *
+  *           output = 13 (6 + -1 + 3 + 5 = 13)                        *
+  *                                                                    *
+  **********************************************************************/
+
+var findMaxSegment = function(arr) {
+  var fullSegmentSum = 0;
+  var sumToHere = 0;
+  var maxSoFar = 0;
+
+  for (var i=0; i<arr.length; i++){
+    fullSegmentSum = fullSegmentSum + arr[i];
+    var tempSum = 0;
+    for (var j=0; j<i; j++){
+      tempSum = tempSum + arr[j];
+      if (sumToHere < (fullSegmentSum - tempSum)) {
+        sumToHere = fullSegmentSum - tempSum;
+      }
+    }
+    if (maxSoFar < fullSegmentSum){
+      maxSoFar = fullSegmentSum;
+    }
+    else if (maxSoFar < sumToHere) {
+      maxSoFar = sumToHere;
+    }
+  }
+  return maxSoFar;
+}
